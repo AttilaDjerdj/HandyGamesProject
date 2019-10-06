@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* tilting of each individual */
 public class Char_Collision_Handler : MonoBehaviour {
     public bool moveR = true;
     private float lerpSpeed;
@@ -25,6 +26,10 @@ public class Char_Collision_Handler : MonoBehaviour {
         TraverseRamp(coll);
     }
 
+    /** 
+    * each ramp has two triggers, one an the bottom and one at the top of the ramp
+    * the characters are tilted depending on the collider
+    */
     public void TraverseRamp(Collider2D coll) {
         if (coll.tag == "Ramp Bottom") {
             startRot = transform.rotation;
