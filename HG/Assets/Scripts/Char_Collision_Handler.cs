@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+/** 
+ * colliders detect trigger, which are placed at the top and bottom of each ramp
+ * depending on which trigger is collided with, the hosatge or hiijacker tilts accordingly
+ * lerping is used to have a smooth tilting
+ */
 public class Char_Collision_Handler : MonoBehaviour {
     public bool moveR = true;
     private float lerpSpeed;

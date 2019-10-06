@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * each group consists of 1 hostage and at leats 1 hijacker to the left and to the right of the hostage
+ * it is randomly decided how many hijakcers are on each side of a hostage 
+ * each group spawn at a different spawnpoint and time
+ */
 public class Spawner_Group : MonoBehaviour {
+    /* hostages */
     [SerializeField]
-    private List<GameObject> characters;
+    private List<GameObject> hostages;
     [SerializeField]
     private List<GameObject> spawnpoints;
     public GameObject ladybug;
     public GameObject group;
+
+    /** each group is surrounded by a collider box to detect whether the group has to switch directions */
     public GameObject groupMoverBox;
 
     public int maxLadybugs = 2;
@@ -20,6 +28,10 @@ public class Spawner_Group : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        /** 
+         * for each spawnpoint a group is spawned
+         * the delay is realized by using coroutines
+         */
         foreach (GameObject spawnpoint in spawnpoints) {
             int secondsToWait = Random.Range(3, 10);
             StartCoroutine(WaitToSpawnNextGroup(secondsToWait, spawnpoint));
@@ -41,14 +53,18 @@ public class Spawner_Group : MonoBehaviour {
         }
     }
 
+    /**
+     * generate group, hostages, hijackers and assings relations
+     * each group is generated with a random hostage
+     * */
     IEnumerator WaitToSpawnNextGroup(float secondsToWait, GameObject spawnpoint) {
         yield return new WaitForSecondsRealtime(secondsToWait);
-        int charactersIndex = Random.Range(0, characters.Count);
+        int charactersIndex = Random.Range(0, hostages.Count);
         GameObject groupMover = Instantiate(groupMoverBox, spawnpoint.transform.position, Quaternion.identity);
         GameObject groupObject = GameObject.Instantiate(group, spawnpoint.transform.position, Quaternion.identity);
         groupObject.transform.SetParent(groupMover.transform);
 
-        GameObject character = GameObject.Instantiate(characters[charactersIndex], spawnpoint.transform.position, Quaternion.identity);
+        GameObject character = GameObject.Instantiate(hostages[charactersIndex], spawnpoint.transform.position, Quaternion.identity);
         character.transform.SetParent(groupObject.transform);
 
         groupObject.GetComponent<Group_Handler>().SetHostage(character);
@@ -70,7 +86,8 @@ public class Spawner_Group : MonoBehaviour {
 
         SetLayer(groupObject.transform, spawnpoint.layer);
 
-        characters.RemoveAt(charactersIndex);
+        /* hostages are removed out of the hostages list to ensure that each hostage is unique */
+        hostages.RemoveAt(charactersIndex);
 
     }
 }

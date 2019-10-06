@@ -1,7 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * each individual is moved with the physics engine of unity
+ * speed is fixed at 3.0f
+ * toDo: adjustable speed
+ */
 public class Movement : MonoBehaviour {
     // Start is called before the first frame update
     [SerializeField]
@@ -12,7 +16,6 @@ public class Movement : MonoBehaviour {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        // speed = 4.0f;
     }
 
     // Update is called once per frame

@@ -4099,8 +4099,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101.3, y: -29.4}
-  m_SizeDelta: {x: 182.5, y: 48.8}
+  m_AnchoredPosition: {x: 278.8, y: -29.4}
+  m_SizeDelta: {x: 285.1, y: 48.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928555790
 MonoBehaviour:
@@ -4111,9 +4111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928555788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb6dd738592f514b9b0aed96505b1a2, type: 3}
+  m_Script: {fileID: 11500000, guid: e52164e9fa52ddb49be20a760d731535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingHandlerObject: {fileID: 1731221228}
 --- !u!114 &1928555791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4147,7 +4148,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Time
+  m_Text: 'Ammo: '
 --- !u!222 &1928555792
 CanvasRenderer:
   m_ObjectHideFlags: 0

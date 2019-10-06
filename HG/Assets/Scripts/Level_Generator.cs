@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * each level is randomly generated and consists of several paths (5 in this case)
+ * each path is randomly generated using predefined segements
+ * the segments hold inidviduell properties and the paths are build according to these properties
+ * each level is furthermore split into two areas, pavement and green
+ * whether the top half, respectively the bottom half, is green or pavement is randomly decided 
+ */
 public class Level_Generator : MonoBehaviour {
-    // whether the top half of the level is green or pavement
+    /** whether the top half of the level is green or pavement, the bottom half is the opposit */
     private int isBottomGreen;
     [SerializeField]
     private float segmentWidth = 4;
@@ -11,6 +16,7 @@ public class Level_Generator : MonoBehaviour {
     private float segmentHeight = 0.8f;
     [SerializeField]
     private int levelWidth = 2;
+    /** how the level is split */
     [SerializeField]
     private int nmbOfBottomPaths = 3;
     [SerializeField]
@@ -24,30 +30,18 @@ public class Level_Generator : MonoBehaviour {
         GenerateLevel();
     }
 
-    // Start is called before the first frame update
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
     void GenerateLevel() {
+        /** randomly decide, whether top is green or not */
         isBottomGreen = Random.Range(0, 2);
-        /*
-            5 paths consiting of 2 segments each, so 10 segments in total
-            the 5 paths are seperated in 2 areas, green and pavement
-            the top area consists of 3 pathways, the bottem area of 2 pathways
-            isTopGreen decides which area is green and which is pavement
-        */
         Vector3 segmentPos = transform.position;
 
         /* generate a path for each spawnpoint */
         for (int i = 0; i < spawnpoints.Count; ++i) {
 
-            /* bottom half is generated first, top half is generated afterwards */
+            /**
+             * bottom half is generated first, top half is generated afterwards
+             * translation in z direction ist important to avoid clipping
+             * */
             segmentPos.z = i;
             if (i < 3) {
                 if (isBottomGreen == 1) {
@@ -92,6 +86,9 @@ public class Level_Generator : MonoBehaviour {
         }
     }
 
+    /** set layer of parent object and every child object of that parent recursively
+     * note: layer 17 / decoration is ignored while setting layers
+     */
     public void SetLayer(Transform parent, int layer) {
         parent.gameObject.layer = layer;
         foreach (Transform child in parent) {
