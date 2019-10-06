@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ * is solely used for hostages to instantiate a dead hostage or happy hostage
+ * note: not finished, only happy hostage / remeining hostage
+ */
 public class On_destroy_hostage : MonoBehaviour {
     // Start is called before the first frame update
     [SerializeField]
