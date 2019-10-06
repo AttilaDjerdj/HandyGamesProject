@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * each group consists of 1 hostage and at leats 1 hijacker to the left and to the right of the hostage
+ * it is randomly decided how many hijakcers are on each side of a hostage 
+ * each group spawn at a different spawnpoint and time
+ */
 public class Spawner_Group : MonoBehaviour {
     [SerializeField]
     private List<GameObject> characters;
@@ -9,6 +14,8 @@ public class Spawner_Group : MonoBehaviour {
     private List<GameObject> spawnpoints;
     public GameObject ladybug;
     public GameObject group;
+    
+    /** each group is surrounded by a collider box to detect whether the group has to switch directions */
     public GameObject groupMoverBox;
 
     public int maxLadybugs = 2;
@@ -20,6 +27,10 @@ public class Spawner_Group : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        /** 
+         * for each spawnpoint a group is spawned
+         * the delay is realized by using coroutines
+         */
         foreach (GameObject spawnpoint in spawnpoints) {
             int secondsToWait = Random.Range(3, 10);
             StartCoroutine(WaitToSpawnNextGroup(secondsToWait, spawnpoint));
@@ -30,7 +41,7 @@ public class Spawner_Group : MonoBehaviour {
     void Update() {
 
     }
-    /* set layer of parent object and every child object of that parent recursively */
+    /* set layer of parent object and every child object of that parent recursively, note: layer 8 / enemy wont be changed */
     public void SetLayer(Transform parent, int layer) {
         parent.gameObject.layer = layer;
         foreach (Transform child in parent) {
@@ -41,6 +52,10 @@ public class Spawner_Group : MonoBehaviour {
         }
     }
 
+    /**
+     * generate group, hostages, hijackers and assings relations
+     * each group is generated with a random hostage
+     * */
     IEnumerator WaitToSpawnNextGroup(float secondsToWait, GameObject spawnpoint) {
         yield return new WaitForSecondsRealtime(secondsToWait);
         int charactersIndex = Random.Range(0, characters.Count);
