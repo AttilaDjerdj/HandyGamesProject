@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** is solely used for hijackers to instansiate punished ladybugs */
 public class On_Destroy : MonoBehaviour {
     // Start is called before the first frame update
     public GameObject remainsPrefab;
